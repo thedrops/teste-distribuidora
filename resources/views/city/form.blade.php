@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    
+  <div class="container">
     <div class="card col-md-12 ">
     <form action="{{ $data['url'] }}" method="POST">
       {{ csrf_field() }}
@@ -40,5 +40,6 @@
       </div>
     </form>
     </div>
+  </div>
 
 @endsection

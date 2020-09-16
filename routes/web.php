@@ -13,14 +13,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
+
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/rotas', [App\Http\Controllers\RoutesController::class, 'calculateDistanceBetweenTwoPoints']);
+Route::get('/rotas', [App\Http\Controllers\RoutesController::class, 'getRoutes']);
+
+Route::post('/verificar-rotas', [App\Http\Controllers\RoutesController::class, 'calculateDistanceBetweenTwoPoints']);
 
 Route::resource('cidades', App\Http\Controllers\CityController::class);

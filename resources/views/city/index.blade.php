@@ -1,10 +1,10 @@
 @extends('layouts.app')
 @section('content')
-
+  <div class="container">
     <div class="card">
       <div class="card-header">
         <div class="float-left">
-          <h4>Cidades</h4>
+          <b>Cidades</b>
         </div>
         <div class="float-right">
             <button class="btn btn-sm btn-success" data-toggle="modal" data-target="#modalCreateCity" ><i class="fa fa-plus-circle" aria-hidden="true"></i> Nova Cidade</button>
@@ -27,7 +27,19 @@
               <td>{{$item->latitude}}</td>
               <td>{{$item->longitude}}</td>
               <td>
-                <a class="btn btn-info" href='{{ url("cidades/$item->id/edit") }}'><i class="fa fa-edit" aria-hidden="true"></i> Editar</a>
+                <div class="row">
+                  <div class="col-md-6">
+                    <a class="btn btn-info mr-2" href='{{ url("cidades/$item->id/edit") }}'><i class="fa fa-edit" aria-hidden="true"></i> Editar</a>
+                  </div>
+                  <div class="col-md-6">
+                    <form action='{{ url("cidades/$item->id") }}' method="POST">
+                    {{ csrf_field() }}
+
+                    @method('DELETE')
+                    <button class="btn btn-warning" type="submit"><i class="fa fa-trash" aria-hidden="true"></i> Deletar</button>
+                    </form>
+                  </div>
+                </div>
               </td>
             </tr>
           @endforeach
@@ -35,6 +47,7 @@
         </table>
       </div>
     </div>
+  </div>
 
     <!-- Modal -->
     <div class="modal fade" id="modalCreateCity" tabindex="-1" role="dialog" aria-hidden="true">
